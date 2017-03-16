@@ -3,13 +3,33 @@
 <head>
   <title>Chat with socket.io and node.js</title>
   <style>
+    body{
+      background:sandybrown;
+    }
     #chat{
-      height: 500px;
+      background:whitesmoke;
+      padding-top:10px;
+      padding-left:20px;
+      padding-bottom:10px;
+      margin-bottom:10px;
+    }
+    h1{
+      text-align:center;
+      background:powderblue;
+      padding:20px;
+    }
+    h3{
+      text-align:center;
     }
   </style>
 </head>
 <body>
-  <div id="chat"></div>
+  <h1>Speed Reading</h1>
+  <h3>Want to read more words per minute? The best way is to train your brain to need to recognize less letters in a word. See if you can recognize what other people are saying.</h3>
+  <div id="chat">
+    <h3>ChatterBox</h3>
+    <div id="chat_text"></div>
+  </div>
   <form id="send-message">
     <input size="id" id="message"></input>
     <input type=submit></input>
@@ -31,7 +51,13 @@
       });
     
       socket.on('new message', function(data){
-        $chat.append(data + "<br/>");
+        var newMessage = "";
+        for(var i = 0; i < data.length; i++){
+          if(data.charAt(i) != 'a' && data.charAt(i) != 'e' && data.charAt(i) != 'i' && data.charAt(i) != 'o' && data.charAt(i) != 'u'){
+            newMessage += data.charAt(i);
+          }
+        }
+        $chat.append(newMessage + "<br/>");
       });
     });
   </script>
